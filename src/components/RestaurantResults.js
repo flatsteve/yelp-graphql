@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 const RestaurantResults = ({ loading, error, data, fetchMore }) => {
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const [fetchingMore, updateFetchingMore] = useState(false);
 
   if (error) {
     return <p>Error :(</p>;
   }
 
+  if (loading && !fetchingMore) {
+    return <p>Loading...</p>;
+  }
+
   const onLoadMore = () => {
+    updateFetchingMore(true);
+
     fetchMore({
       variables: {
         offset: data.search.business.length
@@ -29,6 +33,8 @@ const RestaurantResults = ({ loading, error, data, fetchMore }) => {
           }
         };
       }
+    }).finally(() => {
+      updateFetchingMore(false);
     });
   };
 
@@ -43,6 +49,8 @@ const RestaurantResults = ({ loading, error, data, fetchMore }) => {
           </div>
         );
       })}
+
+      {fetchingMore && <p>Loading more data...</p>}
 
       <button onClick={onLoadMore}>Load more</button>
     </div>
