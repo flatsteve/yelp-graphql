@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import RestaurantListItem from "./RestaurantListItem";
+
 const RestaurantResults = ({ loading, error, data, fetchMore }) => {
   const [fetchingMore, updateFetchingMore] = useState(false);
 
@@ -40,19 +42,19 @@ const RestaurantResults = ({ loading, error, data, fetchMore }) => {
 
   return (
     <div>
-      <h3>Total restaurants found: {data.total}</h3>
+      <h3>Total restaurants: {data.search.total}</h3>
 
       {data.search.business.map(restaurant => {
         return (
-          <div key={restaurant.id}>
-            <p>{restaurant.name}</p>
-          </div>
+          <RestaurantListItem restaurant={restaurant} key={restaurant.id} />
         );
       })}
 
       {fetchingMore && <p>Loading more data...</p>}
 
-      <button onClick={onLoadMore}>Load more</button>
+      {data.search.business.length < data.search.total && (
+        <button onClick={onLoadMore}>Load more</button>
+      )}
     </div>
   );
 };

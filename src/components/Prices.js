@@ -9,17 +9,21 @@ const prices = [
 ];
 
 const Prices = ({ price, updatePrice }) => {
-  return prices.map(priceData => {
-    return (
-      <button
-        key={priceData.id}
-        disabled={price === priceData.value}
-        onClick={() => updatePrice(priceData.value)}
-      >
-        {priceData.label}
-      </button>
-    );
-  });
+  return (
+    <div>
+      {prices.map(priceData => {
+        return (
+          <button
+            key={priceData.id}
+            disabled={price === priceData.value}
+            onClick={() => updatePrice(priceData.value)}
+          >
+            {priceData.label}
+          </button>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Prices;

@@ -6,6 +6,8 @@ import Locations from "./Locations";
 import Prices from "./Prices";
 import RestaurantResults from "./RestaurantResults";
 
+import "./Search.scss";
+
 const Search = () => {
   const [price, updatePrice] = useState("");
   const [location, updateLocation] = useState("New York");
@@ -20,10 +22,12 @@ const Search = () => {
   });
 
   return (
-    <div>
-      <Locations location={location} updateLocation={updateLocation} />
+    <div className="Search">
+      <div className="Search__controls">
+        <Locations location={location} updateLocation={updateLocation} />
 
-      <Prices price={price} updatePrice={updatePrice} />
+        <Prices price={price} updatePrice={updatePrice} />
+      </div>
 
       <RestaurantResults
         error={error}

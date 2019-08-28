@@ -1,17 +1,25 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import client from "./data/client";
 import Search from "./components/Search";
+import Restaurant from "./components/Restaurant";
+
+import "./App.scss";
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <h1>CaterCow</h1>
+      <BrowserRouter>
+        <div className="App">
+          <h1>CaterCow</h1>
 
-        <Search />
-      </div>
+          <Route path="/" exact component={Search} />
+
+          <Route path="/restaurants/:id" exact component={Restaurant} />
+        </div>
+      </BrowserRouter>
     </ApolloProvider>
   );
 }

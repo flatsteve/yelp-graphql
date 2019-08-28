@@ -1,0 +1,18 @@
+.RestaurantListItem {
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  padding: 1.25rem 0;
+
+  &:last-of-type {
+    border: none;
+  }
+
+  img {
+    border-radius: 1.25rem;
+    height: 7.5rem;
+    object-fit: cover;
+    margin-right: 1.25rem;
+    width: 7.5rem;
+  }
+}

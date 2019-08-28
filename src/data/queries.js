@@ -14,9 +14,28 @@ export const restaurantSearchQuery = gql`
       total
       business {
         id
+        alias
         name
-        url
+        rating
+        photos
       }
+    }
+  }
+`;
+
+export const restaurantQuery = gql`
+  query($alias: String) {
+    business(id: $alias) {
+      name
+      id
+      is_claimed
+      is_closed
+      url
+      phone
+      display_phone
+      review_count
+      rating
+      photos
     }
   }
 `;
