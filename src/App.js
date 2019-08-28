@@ -13,7 +13,7 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div className="App">
-          <h1>CaterCow</h1>
+          <h1>Munchy Box</h1>
 
           <Route path="/" exact component={Search} />
 
