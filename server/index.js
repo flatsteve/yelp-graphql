@@ -3,11 +3,12 @@ const request = require("request");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const ACCESS_TOKEN =
-  "dw33k4P4VtwPiAcaR4idzeq4Vc2fHbbsnqq5AIIkezSddoxZQjAg0dBAIPcj6BbCikyUbcW_yLRZOKV0vmWc85liUTFa2hn-Y4FDlrO9perxrxTrKUmXEyHZBCZlXXYx";
+require("dotenv").config({ path: __dirname + "/.env" });
+
+const ACCESS_TOKEN = process.env.YELP_TOKEN;
 const YELP_API_URL = "https://api.yelp.com/v3/graphql";
 
-var app = express();
+const app = express();
 
 app.use(
   cors({
