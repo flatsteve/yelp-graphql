@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { restaurantSearchQuery } from "../data/queries";
@@ -9,8 +9,13 @@ import RestaurantResults from "./RestaurantResults";
 import "./Search.scss";
 
 const Search = () => {
-  const [price, updatePrice] = useState("");
-  const [location, updateLocation] = useState("New York");
+  const defaultSearchData = { location: "New York", price: "" };
+  const searchData =
+    JSON.parse(localStorage.getItem("cc__search_data")) || defaultSearchData;
+
+  const [location, updateLocation] = useState(searchData.location);
+  const [price, updatePrice] = useState(searchData.price);
+
   const { error, loading, data, fetchMore } = useQuery(restaurantSearchQuery, {
     variables: {
       location,
@@ -20,6 +25,13 @@ const Search = () => {
     },
     fetchPolicy: "cache-and-network"
   });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "cc__search_data",
+      JSON.stringify({ location, price })
+    );
+  }, [location, price]);
 
   return (
     <div className="Search">
